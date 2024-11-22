@@ -7,10 +7,12 @@
 </head>
 <body>
     <h1>Markdown to PDF Converter</h1>
-    <form action="https://api.github.com/repos/Ghost-IU/mardkown-to-pdf-py/dispatches" method="POST">
+    <form action="https://api.github.com/repos/ghost-iu/markdown-to-pdf-py/dispatches" method="POST">
         <textarea name="markdown" rows="10" cols="50" placeholder="Enter your markdown here..."></textarea><br>
         <input type="hidden" name="event_type" value="markdown_to_pdf">
         <input type="submit" value="Convert to PDF">
     </form>
+    <p>After submitting, your converted PDF will be available for download at:</p>
+    <p><a href="https://ghost-iu.github.io/markdown-to-pdf-py/output.pdf" target="_blank">Download Converted PDF</a></p>
 </body>
 </html>

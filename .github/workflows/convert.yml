@@ -34,8 +34,19 @@ jobs:
         echo "${{ github.event.inputs.markdown }}" > input.md
         python convert_to_pdf.py "$(cat input.md)" output.pdf
 
-    - name: Upload PDF
-      uses: actions/upload-artifact@v3
-      with:
-        name: markdown-to-pdf
-        path: output.pdf
+    - name: Create a PDF output directory
+      run: mkdir -p pdf_output
+
+    - name: Move PDF to output directory
+      run: mv output.pdf pdf_output/
+
+    - name: Commit and Push PDF
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git pull origin main
+        cp pdf_output/output.pdf public/output.pdf
+        git add public/output.pdf
+        git commit -m "Add generated PDF file"
+        git push origin main
+    
