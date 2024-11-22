@@ -1,1 +1,41 @@
 name: Convert Markdown to PDF
+
+on:
+  workflow_dispatch:
+    inputs:
+      markdown:
+        description: 'Markdown content'
+        required: true
+        type: string
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install markdown pdfkit
+
+    - name: Install wkhtmltopdf
+      run: sudo apt-get install -y wkhtmltopdf
+
+    - name: Convert Markdown to PDF
+      run: |
+        echo "${{ github.event.inputs.markdown }}" > input.md
+        python convert_to_pdf.py "$(cat input.md)" output.pdf
+
+    - name: Upload PDF
+      uses: actions/upload-artifact@v3
+      with:
+        name: markdown-to-pdf
+        path: output.pdf
