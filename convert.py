@@ -11,7 +11,7 @@ def markdown_to_pdf(markdown_text, output_pdf):
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("Usage: python convert_to_pdf.py '<markdown_text>' <output_pdf>")
+        print("Usage: python convert.py '<markdown_text>' <output_pdf>")
     else:
         markdown_input = sys.argv[1]
         output_file = sys.argv[2]
